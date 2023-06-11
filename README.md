@@ -11,3 +11,9 @@ I’ll use Python exclusively.
 
 As this is a learning project for me, I’ll focus on coding everything here myself and won’t accept PR.
 You are welcome to copy and use my code for whatever purpose you want.
+
+## Structure of the repository
+
+### Exploration folder
+
+This folder will contain tutorial results and other temporary scripts. Basically this’ll be used as a training ground/API Exploration ground, before going on with a cleaner implementation.
