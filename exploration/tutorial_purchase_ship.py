@@ -16,10 +16,10 @@ def find_shipyard(bearer_token: str, system_symbol: str) -> None:
                 print(waypoint)
 
 def view_available_ships(bearer_token: str, system: str, waypoint: str) -> None:
-    # curl 'https://api.spacetraders.io/v2/systems/:systemSymbol/waypoints/:shipyardWaypointSymbol/shipyard' \
+    # noqa curl 'https://api.spacetraders.io/v2/systems/:systemSymbol/waypoints/:shipyardWaypointSymbol/shipyard' \
     #  --header 'Authorization: Bearer INSERT_TOKEN_HERE'
     response = req.get(
-        url = f"https://api.spacetraders.io/v2/systems/{system}/waypoints/{waypoint}/shipyard",
+        url = f"https://api.spacetraders.io/v2/systems/{system}/waypoints/{waypoint}/shipyard", # noqa
         headers = {"Authorization": f"Bearer {bearer_token}"}
     )
     for ship in response.json()["data"]["ships"]:

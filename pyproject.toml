@@ -27,6 +27,7 @@ poetry = "*"
 pytest = "*"
 mypy = "*"
 types-requests = "*"
+ruff = "^0.0.277"
 
 [build-system]
 requires = ["poetry-core"]
@@ -39,3 +40,7 @@ no_implicit_optional = true
 warn_return_any = true
 warn_unused_ignores = true
 exclude = ["exploration", "build"]
+
+[tool.ruff]
+target-version = "py311"
+fix = true

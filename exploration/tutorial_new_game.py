@@ -29,7 +29,7 @@ def get_agent_info(bearer_token: str) -> None:
     print(response.text)
 
 def view_starting_location(bearer_token: str, system: str, waypoint: str) -> None:
-    # curl 'https://api.spacetraders.io/v2/systems/:systemSymbol/waypoints/:waypointSymbol' \
+    # noqa curl 'https://api.spacetraders.io/v2/systems/:systemSymbol/waypoints/:waypointSymbol' \
     # --header 'Authorization: Bearer INSERT_TOKEN_HERE'
     response = req.get(
         url = f"https://api.spacetraders.io/v2/systems/{system}/waypoints/{waypoint}",
@@ -39,5 +39,9 @@ def view_starting_location(bearer_token: str, system: str, waypoint: str) -> Non
 
 if __name__ == "__main__":
     # register_new_agent()
-    # get_agent_info(os.getenv("SPACE_TRADERS_BEARER_TOKEN", "No token!"))
-    # view_starting_location(os.getenv("SPACE_TRADERS_BEARER_TOKEN", "No token!"), "X1-KS52", "X1-KS52-07960X")
+    get_agent_info(os.getenv("SPACE_TRADERS_BEARER_TOKEN", "No token!"))
+    view_starting_location(
+        os.getenv("SPACE_TRADERS_BEARER_TOKEN", "No token!"),
+        "X1-KS52",
+        "X1-KS52-07960X",
+    )
