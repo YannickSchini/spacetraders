@@ -17,6 +17,7 @@ version = "0.0.1"
 description = "Code used to play spacetraders.io"
 readme = "README.md"
 authors =["Yannick Schini <yannick.schini@proton.me>"]
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
