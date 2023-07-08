@@ -11,11 +11,31 @@ classifiers = [
   "Programming Language :: Python"
 ]
 
-dependencies = [
-  "requests",
-]
+[tool.poetry]
+name = "spacetraders"
+version = "0.0.1"
+description = "Code used to play spacetraders.io"
+readme = "README.md"
+authors =["Yannick Schini <yannick.schini@proton.me>"]
 
-[project.optional-dependencies]
-test = [
-  "pytest",
-]
+[tool.poetry.dependencies]
+python = "^3.10"
+requests = "*"
+poetry = "*"
+
+[tool.poetry.group.test.dependencies]
+pytest = "*"
+mypy = "*"
+types-requests = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+disallow_untyped_defs = true
+show_error_codes = true
+no_implicit_optional = true
+warn_return_any = true
+warn_unused_ignores = true
+exclude = ["exploration", "build"]
