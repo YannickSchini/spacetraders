@@ -1,2 +1,5 @@
 .python-version
 spacetraders.egg-info
+.agent_token
+build/
+__pycache__/
