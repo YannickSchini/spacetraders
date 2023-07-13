@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List
 
@@ -19,9 +19,11 @@ class Contract():
         return f"Contract with ID {self.contract_id}"
 
 class ContractRepository(ABC):
+    @abstractmethod
     def get_contracts(self, agent_token: str) -> List[Contract]:
         raise NotImplementedError
 
+    @abstractmethod
     def accept_contract(self, contract_id: str, agent_token: str) -> None:
         raise NotImplementedError
 
@@ -45,5 +47,6 @@ class Agent():
         )
 
 class AgentRepository(ABC):
+    @abstractmethod
     def get_agent(self) -> Agent:
         raise NotImplementedError
