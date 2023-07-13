@@ -3,7 +3,6 @@
 ## Next steps
 
 Here are my next priorities, in no particular order:
-- The code is pretty naive so far: it assumes no operation can fail. I'll have to robustify this somehow. Adding some errors in the domain, and handling other ones in the repositories.
 - The code is also quite silent so far, without any logging. I should add some basic logging at least.
 - Let's keep going forward in the tutorial, adding the buying of a ship, mining of the ore, etc.
 

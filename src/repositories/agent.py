@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Optional
 
 import requests as req
+from requests.models import HTTPError
 
 from src.domain.model import Agent, AgentRepository
 
@@ -30,6 +31,8 @@ class HttpAndFileAgentRepository(AgentRepository):
             headers = {"Content-Type": "application/json"},
             data = data,
         )
+        if response.status_code > 299:
+            raise HTTPError(response.text)
         token = response.json()["data"]["token"]
         with open(AGENT_TOKEN_PATH, "w") as f:
             f.write(token)

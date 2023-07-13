@@ -1,6 +1,7 @@
 from typing import List
 
 import requests as req
+from requests.models import HTTPError
 
 from src.domain.model import Contract, ContractRepository, Delivery
 
@@ -11,6 +12,8 @@ class HttpContractRepository(ContractRepository):
             url = "https://api.spacetraders.io/v2/my/contracts",
             headers = {"Authorization": f"Bearer {agent_token}"}
         )
+        if response.status_code > 299:
+            raise HTTPError(response.text)
         contracts = []
         for raw_contract in response.json()["data"]:
             deliveries = []
