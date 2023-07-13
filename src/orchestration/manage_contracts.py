@@ -1,6 +1,7 @@
 from typing import List
 
 from src.domain.model import AgentRepository, Contract, ContractRepository
+from src.logging import configure_logger
 from src.repositories.agent import HttpAndFileAgentRepository
 from src.repositories.contract import HttpContractRepository
 
@@ -14,6 +15,7 @@ def get_contracts(
 
 
 if __name__ == "__main__":
+    configure_logger()
     agent_repo = HttpAndFileAgentRepository()
     contracts_repo = HttpContractRepository()
     print(get_contracts(agent_repo, contracts_repo))

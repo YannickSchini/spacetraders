@@ -23,6 +23,7 @@ packages = [{include = "src"}]
 python = "^3.10"
 requests = "*"
 poetry = "*"
+structlog = "^23.1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "*"
