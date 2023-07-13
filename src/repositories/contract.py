@@ -1,8 +1,8 @@
-from src.domain.model import ContractRepository
-from src.domain.model import Contract
-from src.domain.model import Delivery
 from typing import List
+
 import requests as req
+
+from src.domain.model import Contract, ContractRepository, Delivery
 
 
 class HttpContractRepository(ContractRepository):

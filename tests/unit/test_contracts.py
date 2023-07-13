@@ -1,4 +1,5 @@
 from typing import List
+
 from src.domain.model import Contract, Delivery
 from src.repositories.agent import InMemoryAgentRepository
 from src.repositories.contract import InMemoryContractRepository

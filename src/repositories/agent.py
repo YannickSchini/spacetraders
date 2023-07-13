@@ -1,8 +1,9 @@
-from typing import Optional
 from pathlib import Path
-from src.domain.model import AgentRepository
-from src.domain.model import Agent
+from typing import Optional
+
 import requests as req
+
+from src.domain.model import Agent, AgentRepository
 
 AGENT_TOKEN_FILENAME = ".agent_token"
 REPOSITORY_BASE_PATH = Path(__file__).parent.parent.parent

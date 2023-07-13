@@ -2,6 +2,7 @@ import os
 
 import requests as req
 
+
 def view_contracts(bearer_token: str) -> None:
     # curl 'https://api.spacetraders.io/v2/my/contracts' \
     # --header 'Authorization: Bearer INSERT_TOKEN_HERE'

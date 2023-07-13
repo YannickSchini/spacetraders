@@ -1,7 +1,9 @@
 from typing import List
+
 from src.domain.model import AgentRepository, Contract, ContractRepository
 from src.repositories.agent import HttpAndFileAgentRepository
 from src.repositories.contract import HttpContractRepository
+
 
 def get_contracts(
         agent_repo: AgentRepository,

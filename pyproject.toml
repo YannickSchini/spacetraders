@@ -45,3 +45,4 @@ exclude = ["exploration", "build"]
 [tool.ruff]
 target-version = "py311"
 fix = true
+select = ["E", "F", "I"]
