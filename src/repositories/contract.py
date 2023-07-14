@@ -4,7 +4,7 @@ import requests as req
 import structlog
 from requests.models import HTTPError
 
-from src.domain.model import Contract, ContractRepository, Delivery
+from src.domain.model import Contract, ContractRepository, Delivery, Waypoint
 
 logger = structlog.get_logger()
 
@@ -25,7 +25,7 @@ class HttpContractRepository(ContractRepository):
                 deliveries.append(
                     Delivery(
                         merchandise=raw_delivery_details["tradeSymbol"],
-                        destination=raw_delivery_details["destinationSymbol"],
+                        destination=Waypoint(raw_delivery_details["destinationSymbol"]),
                         units_required=raw_delivery_details["unitsRequired"],
                         units_fulfilled=raw_delivery_details["unitsFulfilled"]
                     )

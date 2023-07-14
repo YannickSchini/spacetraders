@@ -1,6 +1,6 @@
 from typing import List
 
-from src.domain.model import Contract, Delivery
+from src.domain.model import Contract, Delivery, Waypoint
 from src.repositories.agent import InMemoryAgentRepository
 from src.repositories.contract import InMemoryContractRepository
 
@@ -10,7 +10,7 @@ contracts = [
         delivery_details=[
             Delivery(
                 merchandise="ROCK",
-                destination="THERE",
+                destination=Waypoint("THERE"),
                 units_required=100,
                 units_fulfilled=0,
             ),
@@ -21,13 +21,13 @@ contracts = [
         delivery_details=[
             Delivery(
                 merchandise="ROCK",
-                destination="THERE",
+                destination=Waypoint("THERE"),
                 units_required=10000,
                 units_fulfilled=0,
             ),
             Delivery(
                 merchandise="GOLD",
-                destination="ALL_THE_WAY_OVER_THERE",
+                destination=Waypoint("ALL_THE_WAY_OVER_THERE"),
                 units_required=100,
                 units_fulfilled=5,
             ),

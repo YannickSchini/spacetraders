@@ -4,9 +4,16 @@ from typing import List
 
 
 @dataclass
+class Waypoint():
+    waypoint: str
+
+    def __repr__(self) -> str:
+        return f"Waypoint {self.waypoint}"
+
+@dataclass
 class Delivery():
     merchandise: str
-    destination: str
+    destination: Waypoint
     units_required: int
     units_fulfilled: int
 
@@ -30,6 +37,7 @@ class ContractRepository(ABC):
 @dataclass
 class Agent():
     token: str
+    headquarters: Waypoint
 
     def __str__(self) -> str:
         return f"Agent with token {self.token}"
