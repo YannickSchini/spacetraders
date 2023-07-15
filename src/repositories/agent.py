@@ -54,7 +54,7 @@ class HttpAndFileAgentRepository(AgentRepository):
         if response.status_code > 299:
             raise HTTPError(response.text)
         token = response.json()["data"]["token"]
-        headquarters = response.json()["data"]["headquarters"]
+        headquarters = Waypoint(response.json()["data"]["headquarters"])
         agent = Agent(token, headquarters)
         logger.debug("Created a new agent", agent=agent)
         with open(AGENT_TOKEN_PATH, "w") as f:
