@@ -63,7 +63,8 @@ class HttpAndFileAgentRepository(AgentRepository):
 
 
 class InMemoryAgentRepository(AgentRepository):
-    agent: Optional[Agent] = None
+    def __init__(self, agent: Optional[Agent] = None):
+        self.agent = agent
 
     def get_agent(self) -> Agent:
         logger.info("Getting the agent")
