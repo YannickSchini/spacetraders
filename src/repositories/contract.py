@@ -4,7 +4,8 @@ import requests as req
 import structlog
 from requests.models import HTTPError
 
-from src.domain.model import Contract, ContractRepository, Delivery, Waypoint
+from src.domain.agent import Contract, ContractRepository, Delivery
+from src.domain.waypoint import Waypoint
 
 logger = structlog.get_logger()
 

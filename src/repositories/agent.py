@@ -5,7 +5,8 @@ import requests as req
 import structlog
 from requests.models import HTTPError
 
-from src.domain.model import Agent, AgentRepository, Waypoint
+from src.domain.agent import Agent, AgentRepository
+from src.domain.waypoint import Waypoint
 
 AGENT_TOKEN_FILENAME = ".agent_token"
 REPOSITORY_BASE_PATH = Path(__file__).parent.parent.parent

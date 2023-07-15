@@ -1,4 +1,4 @@
-from src.domain.model import Agent, AgentRepository
+from src.domain.agent import Agent, AgentRepository
 from src.logging import configure_logger
 from src.repositories.agent import HttpAndFileAgentRepository
 

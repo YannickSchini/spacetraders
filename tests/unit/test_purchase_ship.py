@@ -1,5 +1,6 @@
 
-from src.domain.model import Agent, Waypoint
+from src.domain.agent import Agent
+from src.domain.waypoint import Waypoint
 from src.orchestration.purchase_ship import find_local_shipyard
 from src.repositories.agent import InMemoryAgentRepository
 from src.repositories.waypoint import InMemoryWaypoinyRepository

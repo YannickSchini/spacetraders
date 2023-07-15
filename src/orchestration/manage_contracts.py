@@ -1,6 +1,6 @@
 from typing import List
 
-from src.domain.model import AgentRepository, Contract, ContractRepository
+from src.domain.agent import AgentRepository, Contract, ContractRepository
 from src.logging import configure_logger
 from src.repositories.agent import HttpAndFileAgentRepository
 from src.repositories.contract import HttpContractRepository

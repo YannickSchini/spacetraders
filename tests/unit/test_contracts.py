@@ -1,6 +1,7 @@
 from typing import List
 
-from src.domain.model import Contract, Delivery, Waypoint
+from src.domain.agent import Contract, Delivery
+from src.domain.waypoint import Waypoint
 from src.repositories.agent import InMemoryAgentRepository
 from src.repositories.contract import InMemoryContractRepository
 

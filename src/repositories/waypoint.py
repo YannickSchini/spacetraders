@@ -2,7 +2,7 @@ from typing import Dict, List
 
 import requests as req
 
-from src.domain.model import Waypoint, WaypointRepository
+from src.domain.waypoint import Waypoint, WaypointRepository
 
 
 class HttpWaypointRepository(WaypointRepository):
