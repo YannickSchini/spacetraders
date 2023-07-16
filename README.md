@@ -25,7 +25,9 @@ You are welcome to copy and use my code for whatever purpose you want.
 
 This folder will contain tutorial results and other temporary scripts. Basically this’ll be used as a training ground/API Exploration ground, before going on with a cleaner implementation.
 
-## Code Structure and other thoughts
+### CI
 
-Seeing how there are weekly server resets, and that they require to re-create agents, I guess I'll include them in my "domain model". I was on the fence about it, but seeing how registering new agents will be a regular task, I might as well code it up nicely instead of relying on a script.
-We'll store the token in a local file for convenience.
+I don't have a proper, automated CI (yet), but I do have the repo setup in a way that lets me run the following commands easily and often:
+- `mypy --strict .`
+- `ruff .`
+- `pytest`
