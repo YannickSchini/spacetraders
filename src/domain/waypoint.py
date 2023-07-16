@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import List
+from typing import List, Set
 
 
 @dataclass
@@ -16,4 +16,10 @@ class WaypointRepository(ABC):
     def get_waypoints_in_system(self,
                                 target_system: str,
                                 agent_token: str) -> List[Waypoint]:
+        raise NotImplementedError
+
+    @abstractmethod
+    def list_available_ship_types(self,
+                                  shipyard: Waypoint,
+                                  agent_token: str) -> Set[str]:
         raise NotImplementedError
