@@ -39,14 +39,14 @@ class HttpAndFileAgentRepository(AgentRepository):
         )
         if response.status_code > 299:
             raise HTTPError(response.text)
-        headquarters = response.json()["data"]["headquarters"]
+        headquarters = Waypoint(response.json()["data"]["headquarters"])
         logger.debug("Gotten info from existing agent",
                      agent=Agent(agent_token, headquarters))
         return Agent(agent_token, headquarters)
 
 
     def _create_agent(self) -> Agent:
-        data: str = '{"symbol": "YoShi", "faction": "COSMIC"}'
+        data: str = '{"symbol": "YoShingy", "faction": "COSMIC"}'
         response = req.post(
             url = "https://api.spacetraders.io/v2/register",
             headers = {"Content-Type": "application/json"},
@@ -55,7 +55,7 @@ class HttpAndFileAgentRepository(AgentRepository):
         if response.status_code > 299:
             raise HTTPError(response.text)
         token = response.json()["data"]["token"]
-        headquarters = Waypoint(response.json()["data"]["headquarters"])
+        headquarters = Waypoint(response.json()["data"]["agent"]["headquarters"])
         agent = Agent(token, headquarters)
         logger.debug("Created a new agent", agent=agent)
         with open(AGENT_TOKEN_PATH, "w") as f:
