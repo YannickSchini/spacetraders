@@ -11,6 +11,9 @@ class Waypoint():
     def __repr__(self) -> str:
         return f"Waypoint {self.waypoint} with traits {self.traits}"
 
+    def __hash__(self) -> int:
+        return hash((self.waypoint, "".join(sorted(self.traits))))
+
 class WaypointRepository(ABC):
     @abstractmethod
     def get_waypoints_in_system(self,
