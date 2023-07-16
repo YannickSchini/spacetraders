@@ -1,8 +1,12 @@
 from typing import Dict, List
 
 import requests as req
+import structlog
+from requests.models import HTTPError
 
 from src.domain.waypoint import Waypoint, WaypointRepository
+
+logger = structlog.get_logger()
 
 
 class HttpWaypointRepository(WaypointRepository):
@@ -10,10 +14,13 @@ class HttpWaypointRepository(WaypointRepository):
                                 target_system: str,
                                 agent_token: str) -> List[Waypoint]:
         
+        logger.info(f"Getting the waypoints in system {target_system}")
         response = req.get(
             url = f"https://api.spacetraders.io/v2/systems/{target_system}/waypoints",
             headers = {"Authorization": f"Bearer {agent_token}"}
         )
+        if response.status_code > 299:
+            raise HTTPError(response.text)
         waypoints = []
         for raw_waypoint in response.json()["data"]:
             traits = []
