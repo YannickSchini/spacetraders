@@ -13,7 +13,7 @@ class HttpWaypointRepository(WaypointRepository):
     def get_waypoints_in_system(self,
                                 target_system: str,
                                 agent_token: str) -> List[Waypoint]:
-        
+
         logger.info(f"Getting the waypoints in system {target_system}")
         response = req.get(
             url = f"https://api.spacetraders.io/v2/systems/{target_system}/waypoints",
@@ -61,7 +61,7 @@ class InMemoryWaypoinyRepository(WaypointRepository):
         return self.waypoints[target_system]
 
     def list_available_ship_types(self,
-                                  shipyard: Waypoint, 
+                                  shipyard: Waypoint,
                                   agent_token: str) -> Set[str]:
         logger.info(f"Getting the available ship types in shipyard {shipyard}")
         return self.shipyards[shipyard]

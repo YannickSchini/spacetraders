@@ -41,7 +41,7 @@ class Agent():
         return contract_repository.get_contracts(self.token)
 
     def accept_contract(self,
-                        contract_id: str, 
+                        contract_id: str,
                         contract_repository: ContractRepository
                         ) -> None:
         contract_repository.accept_contract(

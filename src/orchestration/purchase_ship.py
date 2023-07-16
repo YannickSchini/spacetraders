@@ -34,6 +34,6 @@ if __name__ == "__main__":
 
 # 2. Purchase a ship
 # 2.a. List all available ship types in a shipyard => OK !
-# 2.b Buy the right ship from the shipyard 
+# 2.b Buy the right ship from the shipyard
 # (or raise a Domain exception if we don't have enough money)
 # ==> Can be done with constants and strings for now, no need for complex logic
