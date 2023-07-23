@@ -21,14 +21,14 @@ packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "*"
-poetry = "*"
+requests = "^2.31.0"
+poetry = "^1.5.1"
 structlog = "^23.1.0"
 
 [tool.poetry.group.test.dependencies]
-pytest = "*"
-mypy = "*"
-types-requests = "*"
+pytest = "^7.4.0"
+mypy = "^1.4.1"
+types-requests = "^2.31.0.1"
 ruff = "^0.0.277"
 
 [build-system]
@@ -46,4 +46,4 @@ exclude = ["exploration", "build"]
 [tool.ruff]
 target-version = "py311"
 fix = true
-select = ["E", "F", "I", "W"]
+select = ["E", "F", "I"]
