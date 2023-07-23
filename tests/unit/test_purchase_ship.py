@@ -38,7 +38,7 @@ def test_find_a_shipyard() -> None:
     assert find_local_shipyard(agent_repo_2, waypoint_repo) is None
 
 def test_list_all_ship_types() -> None:
-    agent = Agent("DUMMY_TOKEN", Waypoint("A1-BB2-CCCC5"))
+    agent_repo = InMemoryAgentRepository(Agent("DUMMY_TOKEN", Waypoint("A1-BB2-CCCC5")))
     shipyard = Waypoint("coord3", ["MARKETPLACE", "SHIPYARD"])
     system_with_shipyard = {"A1-BB2": [
         Waypoint("coord1", ["NOT COOL", "TOO HOT", "I'M DYING HERE"]),
@@ -49,6 +49,6 @@ def test_list_all_ship_types() -> None:
     shipyards = {shipyard: {"BIG ASS SHIP", "SMALL SHIP", "BROKEN SHIP"}}
     waypoint_repo = InMemoryWaypoinyRepository(system_with_shipyard, shipyards)
 
-    ship_types = list_available_ship_types(waypoint_repo, shipyard, agent.token)
+    ship_types = list_available_ship_types(agent_repo, waypoint_repo, shipyard)
 
     assert ship_types == {"BIG ASS SHIP", "SMALL SHIP", "BROKEN SHIP"}

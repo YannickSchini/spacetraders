@@ -17,10 +17,11 @@ def find_local_shipyard(agent_repo: AgentRepository,
             return wp
     return None
 
-def list_available_ship_types(waypoint_repo: WaypointRepository,
-                              shipyard: Waypoint,
-                              agent_token: str) -> Set[str]:
-    return waypoint_repo.list_available_ship_types(shipyard, agent_token)
+def list_available_ship_types(agent_repo: AgentRepository,
+                              waypoint_repo: WaypointRepository,
+                              shipyard: Waypoint) -> Set[str]:
+    agent = agent_repo.get_agent()
+    return waypoint_repo.list_available_ship_types(shipyard, agent.token)
 
 
 if __name__ == "__main__":
@@ -29,7 +30,7 @@ if __name__ == "__main__":
     waypoint_repo = HttpWaypointRepository()
     shipyard = find_local_shipyard(agent_repo, waypoint_repo)
     if shipyard:
-        ship_types = list_available_ship_types(waypoint_repo, shipyard, agent.token)
+        ship_types = list_available_ship_types(agent_repo, waypoint_repo, shipyard)
         print(ship_types)
 
 # 2. Purchase a ship
