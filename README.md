@@ -20,13 +20,7 @@ I’ll use Python exclusively.
 As this is a learning project for me, I’ll focus on coding everything here myself and won’t accept PR.
 You are welcome to copy and use my code for whatever purpose you want.
 
-## Structure of the repository
-
-### Exploration folder
-
-This folder will contain tutorial results and other temporary scripts. Basically this’ll be used as a training ground/API Exploration ground, before going on with a cleaner implementation.
-
-### CI
+## CI
 
 I don't have a proper, automated CI (yet), but I do have the repo setup in a way that lets me run the following commands easily and often:
 - `mypy --strict .`
