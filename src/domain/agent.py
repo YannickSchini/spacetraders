@@ -29,10 +29,10 @@ class ContractRepository(ABC):
     def accept_contract(self, contract_id: str, agent_token: str) -> None:
         raise NotImplementedError
 
-@dataclass
 class Agent():
-    token: str
-    headquarters: Waypoint
+    def __init__(self, token: str, headquarters: Waypoint) -> None:
+        self.token = token
+        self.headquarters = headquarters
 
     def __str__(self) -> str:
         return f"Agent with token {self.token}"
