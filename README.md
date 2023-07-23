@@ -25,4 +25,5 @@ You are welcome to copy and use my code for whatever purpose you want.
 I don't have a proper, automated CI (yet), but I do have the repo setup in a way that lets me run the following commands easily and often:
 - `mypy --strict .`
 - `ruff .`
-- `pytest`
+- `pytest tests/unit`
+- `pytest -s tests/integration`
