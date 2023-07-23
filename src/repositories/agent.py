@@ -1,3 +1,5 @@
+import random
+import string
 from pathlib import Path
 from typing import Optional
 
@@ -75,3 +77,36 @@ class InMemoryAgentRepository(AgentRepository):
                 headquarters = Waypoint("X1-YY2-ZZZZZ3")
             )
         return self.agent
+
+
+class PureHttpAgentRepository(AgentRepository):
+    def __init__(self) -> None:
+        self.agent: Optional[Agent] = None
+
+    def get_agent(self) -> Agent:
+        logger.info("Getting the agent")
+        if self.agent:
+            return self.agent
+        else:
+            random_suffix = ''.join(random.choices(
+                                            string.ascii_uppercase + string.digits,
+                                            k=6
+                                            )
+                                    )
+            return self._create_agent(agent_symbol="YoShi_" + random_suffix )
+
+    def _create_agent(self, agent_symbol: str) -> Agent:
+        data: str = '{"symbol": "%s", "faction": "COSMIC"}' % agent_symbol
+        response = req.post(
+            url = "https://api.spacetraders.io/v2/register",
+            headers = {"Content-Type": "application/json"},
+            data = data,
+        )
+        if response.status_code > 299:
+            raise HTTPError(response.text)
+        token = response.json()["data"]["token"]
+        headquarters = Waypoint(response.json()["data"]["agent"]["headquarters"])
+        agent = Agent(token, headquarters)
+        logger.debug("Created a new agent", agent=agent)
+        self.agent = agent
+        return agent
