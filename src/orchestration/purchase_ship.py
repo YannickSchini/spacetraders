@@ -23,6 +23,15 @@ def list_available_ship_types(agent_repo: AgentRepository,
     agent = agent_repo.get_agent()
     return waypoint_repo.list_available_ship_types(shipyard, agent.token)
 
+def buy_ship(agent_repo: AgentRepository,
+            waypoint_repo: WaypointRepository,
+             shipyard: Waypoint,
+             ship_type: str) -> None:
+    agent = agent_repo.get_agent()
+    waypoint_repo.buy_ship(shipyard=shipyard,
+                           ship_type=ship_type,
+                           agent_token=agent.token)
+
 
 if __name__ == "__main__":
     agent_repo = HttpAndFileAgentRepository()
@@ -32,9 +41,6 @@ if __name__ == "__main__":
     if shipyard:
         ship_types = list_available_ship_types(agent_repo, waypoint_repo, shipyard)
         print(ship_types)
-
-# 2. Purchase a ship
-# 2.a. List all available ship types in a shipyard => OK !
-# 2.b Buy the right ship from the shipyard
-# (or raise a Domain exception if we don't have enough money)
-# ==> Can be done with constants and strings for now, no need for complex logic
+        for ship_type in ship_types:
+            if ship_type == "SHIP_MINING_DRONE":
+                buy_ship(agent_repo, waypoint_repo, shipyard, ship_type)

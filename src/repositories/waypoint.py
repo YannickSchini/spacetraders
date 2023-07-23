@@ -47,6 +47,24 @@ class HttpWaypointRepository(WaypointRepository):
 
         return ship_types
 
+    def buy_ship(self,
+                 shipyard: Waypoint,
+                 agent_token: str,
+                 ship_type: str) -> None:
+
+        data = {"shipType": ship_type, "waypointSymbol": shipyard.waypoint}
+        logger.info(f"Buying a {ship_type} ship at shipyard {shipyard}")
+        response = req.post(
+            url = "https://api.spacetraders.io/v2/my/ships",
+            headers = {
+                "Authorization": f"Bearer {agent_token}",
+                "Content-Type": "application/json"
+            },
+            json = data,
+        )
+        if response.status_code > 299:
+            raise HTTPError(response.text)
+
 class InMemoryWaypoinyRepository(WaypointRepository):
     def __init__(self,
                  waypoints: Dict[str, List[Waypoint]],
@@ -65,3 +83,9 @@ class InMemoryWaypoinyRepository(WaypointRepository):
                                   agent_token: str) -> Set[str]:
         logger.info(f"Getting the available ship types in shipyard {shipyard}")
         return self.shipyards[shipyard]
+
+    def buy_ship(self,
+                 shipyard: Waypoint,
+                 agent_token: str,
+                 ship_type: str) -> None:
+        pass

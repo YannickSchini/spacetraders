@@ -26,3 +26,10 @@ class WaypointRepository(ABC):
                                   shipyard: Waypoint,
                                   agent_token: str) -> Set[str]:
         raise NotImplementedError
+
+    @abstractmethod
+    def buy_ship(self,
+                 shipyard: Waypoint,
+                 agent_token: str,
+                 ship_type: str) -> None:
+        raise NotImplementedError
