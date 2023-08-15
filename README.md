@@ -3,7 +3,7 @@
 ## Next steps
 
 Here are my next priorities, in no particular order:
-- Decouple our tests from our domain (see Chapter 5 of Cosmic Python) to allow future refactoring of our domain without too much impact on tests
+- Decouple our tests from our domain (see Chapter 5 of Cosmic Python) to allow future refactoring of our domain without too much impact on tests: the last entity our tests are still coupled to is the Waypoint. We introduced the System entity that should help us decouple it. We can now add a factory method returning an InMemorySystemRepository, and a method that adds a waypoint to a system, similar to what was done for the contracts.
 - Let's keep going forward in the tutorial, adding the buying of a ship, mining of the ore, etc.
 
 ## General presentation of the repository
