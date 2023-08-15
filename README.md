@@ -3,7 +3,7 @@
 ## Next steps
 
 Here are my next priorities, in no particular order:
-- Adding an integration test that runs all the steps of the tutorial sequentially, against the real game server, with a random ID. This will require changes to how we handle the Agent though (currently the ID is hardcoded, we can only manage one agent at a time with the file otherwise we'd overwrite it, etc)
+- Decouple our tests from our domain (see Chapter 5 of Cosmic Python) to allow future refactoring of our domain without too much impact on tests
 - Let's keep going forward in the tutorial, adding the buying of a ship, mining of the ore, etc.
 
 ## General presentation of the repository
