@@ -1,3 +1,4 @@
+from src.orchestration.manage_contracts import accept_contract, get_contracts
 from src.repositories.agent import InMemoryAgentRepository
 from src.repositories.contract import create_in_memory_contract_repo
 
@@ -31,11 +32,9 @@ def test_get_contracts_returns_contracts() -> None:
     assert second_contract_from_repo.delivery_details[0].units_fulfilled == 5
 
 
-def test_accept_contract() -> None:
+def test_accept_first_contract_raises_no_errors() -> None:
     agent_repo = InMemoryAgentRepository.create_agent_repo()
     contracts_repo = create_in_memory_contract_repo()
-    agent = agent_repo.get_agent()
-    contracts = agent.get_contracts(contracts_repo)
+    contracts = get_contracts(agent_repo, contracts_repo)
 
-    agent.accept_contract(contracts[0].contract_id, contracts_repo)
-
+    accept_contract(agent_repo, contracts_repo, contracts[0].contract_id)

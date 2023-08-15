@@ -1,7 +1,7 @@
 from src.domain.agent import Agent, Contract
 from src.domain.waypoint import Waypoint
 from src.orchestration.create_agent import create_agent
-from src.orchestration.manage_contracts import get_contracts
+from src.orchestration.manage_contracts import accept_contract, get_contracts
 from src.orchestration.purchase_ship import (
     buy_ship,
     find_local_shipyard,
@@ -33,7 +33,7 @@ def test_run_tutorial() -> None:
     first_contract_id = contracts[0].contract_id
     assert first_contract_id is not None
 
-    agent.accept_contract(first_contract_id, contracts_repo)
+    accept_contract(agent_repo, contracts_repo, first_contract_id)
 
     # Buy a ship
     shipyard = find_local_shipyard(agent_repo, waypoint_repo)
