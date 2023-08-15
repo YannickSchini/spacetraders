@@ -66,17 +66,19 @@ class HttpAndFileAgentRepository(AgentRepository):
 
 
 class InMemoryAgentRepository(AgentRepository):
-    def __init__(self, agent: Optional[Agent] = None):
+    def __init__(self, agent: Agent):
         self.agent = agent
 
     def get_agent(self) -> Agent:
         logger.info("Getting the agent")
-        if self.agent is None:
-            self.agent = Agent(
-                token = "DUMMY_TOKEN",
-                headquarters = Waypoint("X1-YY2-ZZZZZ3")
-            )
         return self.agent
+    
+    @staticmethod
+    def create_agent_repo(
+        token: str = "DUMMY_TOKEN",
+        headquarters: str = "X1-YY2-ZZZZZ3"
+    ) -> AgentRepository:
+        return InMemoryAgentRepository(Agent(token, Waypoint(headquarters)))
 
 
 class PureHttpAgentRepository(AgentRepository):

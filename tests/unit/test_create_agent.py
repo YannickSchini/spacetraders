@@ -3,6 +3,6 @@ from src.repositories.agent import InMemoryAgentRepository
 
 
 def test_create_agent_returns_token() -> None:
-    agent_repo = InMemoryAgentRepository()
+    agent_repo = InMemoryAgentRepository.create_agent_repo()
     agent = create_agent(agent_repo)
     assert agent.token == "DUMMY_TOKEN"

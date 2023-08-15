@@ -37,14 +37,14 @@ contracts = [
 ]
 
 def test_get_contracts_returns_contracts(contracts: List[Contract] = contracts) -> None:
-    agent_repo = InMemoryAgentRepository()
+    agent_repo = InMemoryAgentRepository.create_agent_repo()
     contracts_repo = InMemoryContractRepository(contracts)
     agent = agent_repo.get_agent()
 
     assert contracts == agent.get_contracts(contracts_repo)
 
 def test_accept_contract(contracts: List[Contract] = contracts) -> None:
-    agent_repo = InMemoryAgentRepository()
+    agent_repo = InMemoryAgentRepository.create_agent_repo()
     contracts_repo = InMemoryContractRepository(contracts)
     agent = agent_repo.get_agent()
     contracts = agent.get_contracts(contracts_repo)
