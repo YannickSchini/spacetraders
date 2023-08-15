@@ -9,14 +9,14 @@ from src.orchestration.purchase_ship import (
 )
 from src.repositories.agent import PureHttpAgentRepository
 from src.repositories.contract import HttpContractRepository
-from src.repositories.waypoint import HttpWaypointRepository
+from src.repositories.system import HttpSystemRepository
 
 
 def test_run_tutorial() -> None:
     # Initialization of the required dependencies
     agent_repo = PureHttpAgentRepository()
     contracts_repo = HttpContractRepository()
-    waypoint_repo = HttpWaypointRepository()
+    waypoint_repo = HttpSystemRepository()
 
     # Agent creation
     agent = create_agent(agent_repo)

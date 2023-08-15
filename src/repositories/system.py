@@ -4,15 +4,15 @@ import requests as req
 import structlog
 from requests.models import HTTPError
 
-from src.domain.waypoint import Waypoint, WaypointRepository
+from src.domain.waypoint import System, SystemRepository, Waypoint
 
 logger = structlog.get_logger()
 
 
-class HttpWaypointRepository(WaypointRepository):
+class HttpSystemRepository(SystemRepository):
     def get_waypoints_in_system(self,
                                 target_system: str,
-                                agent_token: str) -> List[Waypoint]:
+                                agent_token: str) -> System:
 
         logger.info(f"Getting the waypoints in system {target_system}")
         response = req.get(
@@ -21,14 +21,14 @@ class HttpWaypointRepository(WaypointRepository):
         )
         if response.status_code > 299:
             raise HTTPError(response.text)
-        waypoints = []
+        waypoints: List[Waypoint] = []
         for raw_waypoint in response.json()["data"]:
-            traits = []
+            traits: List[str] = []
             for raw_trait in raw_waypoint["traits"]:
                 traits.append(raw_trait["symbol"])
             waypoints.append(Waypoint(waypoint=raw_waypoint["symbol"], traits=traits))
 
-        return waypoints
+        return System(set(waypoints))
 
     def list_available_ship_types(self,
                                   shipyard: Waypoint,
@@ -65,7 +65,7 @@ class HttpWaypointRepository(WaypointRepository):
         if response.status_code > 299:
             raise HTTPError(response.text)
 
-class InMemoryWaypoinyRepository(WaypointRepository):
+class InMemorySystemRepository(SystemRepository):
     def __init__(self,
                  waypoints: Dict[str, List[Waypoint]],
                  shipyards: Dict[Waypoint, Set[str]] = {}) -> None:
@@ -74,9 +74,9 @@ class InMemoryWaypoinyRepository(WaypointRepository):
 
     def get_waypoints_in_system(self,
                                 target_system: str,
-                                agent_token: str) -> List[Waypoint]:
+                                agent_token: str) -> System:
         logger.info(f"Getting the waypoints in system {target_system}")
-        return self.waypoints[target_system]
+        return System(set(self.waypoints[target_system]))
 
     def list_available_ship_types(self,
                                   shipyard: Waypoint,

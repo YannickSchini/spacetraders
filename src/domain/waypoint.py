@@ -14,11 +14,20 @@ class Waypoint():
     def __hash__(self) -> int:
         return hash((self.waypoint, "".join(sorted(self.traits))))
 
-class WaypointRepository(ABC):
+
+@dataclass
+class System:
+    waypoints: Set[Waypoint]
+
+    def __repr__(self) -> str:
+        system_prefix = next(iter(self.waypoints)).waypoint.split("-")[0:1]
+        return f"System {system_prefix}"
+
+class SystemRepository(ABC):
     @abstractmethod
     def get_waypoints_in_system(self,
                                 target_system: str,
-                                agent_token: str) -> List[Waypoint]:
+                                agent_token: str) -> System:
         raise NotImplementedError
 
     @abstractmethod

@@ -4,7 +4,7 @@ from src.orchestration.purchase_ship import (
     list_available_ship_types,
 )
 from src.repositories.agent import InMemoryAgentRepository
-from src.repositories.waypoint import InMemoryWaypoinyRepository
+from src.repositories.system import InMemorySystemRepository
 
 
 def test_find_an_existing_shipyard_in_the_local_system() -> None:
@@ -15,7 +15,7 @@ def test_find_an_existing_shipyard_in_the_local_system() -> None:
         ]
     }
     agent_repo = InMemoryAgentRepository.create_agent_repo()
-    waypoint_repo = InMemoryWaypoinyRepository(system_with_shipyard)
+    waypoint_repo = InMemorySystemRepository(system_with_shipyard)
 
     assert find_local_shipyard(
                 agent_repo,
@@ -33,7 +33,7 @@ def test_find_a_shipyard_returns_none_when_no_shipyard_exists_locally() -> None:
     }
 
     agent_repo = InMemoryAgentRepository.create_agent_repo()
-    waypoint_repo = InMemoryWaypoinyRepository(system_without_shipyard)
+    waypoint_repo = InMemorySystemRepository(system_without_shipyard)
 
     assert find_local_shipyard(agent_repo, waypoint_repo) is None
 
@@ -47,7 +47,7 @@ def test_list_all_ship_types_from_a_local_shipyard() -> None:
         ]
     }
     shipyards = {shipyard: {"BIG ASS SHIP", "SMALL SHIP", "BROKEN SHIP"}}
-    waypoint_repo = InMemoryWaypoinyRepository(system_with_shipyard, shipyards)
+    waypoint_repo = InMemorySystemRepository(system_with_shipyard, shipyards)
 
     ship_types = list_available_ship_types(agent_repo, waypoint_repo, shipyard)
 
