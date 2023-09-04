@@ -98,7 +98,9 @@ class InMemorySystemRepository(SystemRepository):
 
     def add_waypoint(self,
                      waypoint_id: str = "X1-YY2-XXXX5",
-                     traits: List[str] = ["COLD", "SMALL", "EMPTY"]) -> None:
+                     traits: Optional[List[str]] = None) -> None:
+        if traits is None:
+            traits = ["COLD", "SMALL", "EMPTY"]
         system_id = "-".join(waypoint_id.split("-")[0:2])
         if system_id in self.systems:
             self.systems[system_id].append(
@@ -111,8 +113,10 @@ class InMemorySystemRepository(SystemRepository):
     def add_shipyard(
         self,
         shipyard_id: str = "A1-BB2-XXXX5",
-        ship_list: Set[str] = {"BIG_SHIP", "SMALL_SHIP", "SMALLEST_SHIP"}
+        ship_list: Optional[Set[str]] = None,
     ) -> None:
+        if ship_list is None:
+            ship_list = {"BIG_SHIP", "SMALL_SHIP", "SMALLEST_SHIP"}
         shipyard_wp = Waypoint(waypoint=shipyard_id)
         self.shipyards[shipyard_wp] = ship_list
 
