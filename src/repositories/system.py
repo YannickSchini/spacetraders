@@ -1,4 +1,4 @@
-from typing import Dict, List, Set
+from typing import Dict, List, Optional, Set
 
 import requests as req
 import structlog
@@ -67,16 +67,22 @@ class HttpSystemRepository(SystemRepository):
 
 class InMemorySystemRepository(SystemRepository):
     def __init__(self,
-                 waypoints: Dict[str, List[Waypoint]],
-                 shipyards: Dict[Waypoint, Set[str]] = {}) -> None:
-        self.waypoints = waypoints
-        self.shipyards = shipyards
+                 systems: Optional[Dict[str, List[Waypoint]]] = None,
+                 shipyards: Optional[Dict[Waypoint, Set[str]]] = None) -> None:
+        if systems is None:
+            self.systems = {}
+        else:
+            self.systems = systems
+        if shipyards is None:
+            self.shipyards = {}
+        else:
+            self.shipyards = shipyards
 
     def get_waypoints_in_system(self,
                                 target_system: str,
                                 agent_token: str) -> System:
         logger.info(f"Getting the waypoints in system {target_system}")
-        return System(set(self.waypoints[target_system]))
+        return System(set(self.systems[target_system]))
 
     def list_available_ship_types(self,
                                   shipyard: Waypoint,
@@ -89,3 +95,24 @@ class InMemorySystemRepository(SystemRepository):
                  agent_token: str,
                  ship_type: str) -> None:
         pass
+
+    def add_waypoint(self,
+                     waypoint_id: str = "X1-YY2-XXXX5",
+                     traits: List[str] = ["COLD", "SMALL", "EMPTY"]) -> None:
+        system_id = "-".join(waypoint_id.split("-")[0:2])
+        if system_id in self.systems:
+            self.systems[system_id].append(
+                Waypoint(waypoint=waypoint_id, traits=traits)
+            )
+        else:
+            self.systems[system_id] = [Waypoint(waypoint=waypoint_id, traits=traits)]
+
+
+    def add_shipyard(
+        self,
+        shipyard_id: str = "A1-BB2-XXXX5",
+        ship_list: Set[str] = {"BIG_SHIP", "SMALL_SHIP", "SMALLEST_SHIP"}
+    ) -> None:
+        shipyard_wp = Waypoint(waypoint=shipyard_id)
+        self.shipyards[shipyard_wp] = ship_list
+
